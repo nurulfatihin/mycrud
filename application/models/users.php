@@ -1,8 +1,21 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class Users extends MY_Model {
+    
+    const DB_TABLE = 'users';
+    const DB_TABLE_PK ='users_id';
+
+    /**
+    * Users uniques identifier
+    * @var int 
+    */
+   public $users_id ;
+   
+   /**
+    * Users username
+    * @var varchar 
+    */
+   public $users_username;
+   
+}
 
