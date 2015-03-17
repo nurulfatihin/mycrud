@@ -1,34 +1,34 @@
 <?php
 
-class Picture extends MY_Model {
+class Pictures extends MY_Model {
     
-    const DB_TABLE = 'picture';
-    const DB_TABLE_PK = 'picture_id';
+    const DB_TABLE = 'pictures';
+    const DB_TABLE_PK = 'pic_id';
 
     /**
      * Picture unique identifier
      * @var int
      */
-    public $picture_id;
+    public $pic_id;
     
     /**
      * Users unifying reference
      * @var int
      */
-    public $users_id;
+    //public $id;
     
     /**
      * Picture's uploaded picture
      * Path to the file
      * @var longblob(string)
      */
-    public $picture_pic;
+    public $pic_pic;
     
     /**
      * Picture's caption
      * @var longtext 
      */
-    public $picture_caption;
+    public $caption;
             
       
 }

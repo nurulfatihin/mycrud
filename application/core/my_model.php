@@ -4,8 +4,8 @@ class MY_Model extends CI_Model {
     const DB_TABLE = 'abstract';
     const DB_TABLE_PK = 'abtract';
 
-    private $db;
-    private $row;
+    //private $db;
+    //private $row;
 
     /**
      * Create record
