@@ -5,7 +5,7 @@ class MY_Model extends CI_Model {
     const DB_TABLE_PK = 'abtract';
 
     //private $db;
-    //private $row;
+//    private $row;
 
     /**
      * Create record
@@ -26,8 +26,8 @@ class MY_Model extends CI_Model {
      * populate from an array or standard class
      * @param mixed $row
      */
-    public function populate() {
-        foreach($row as $key=>$value) {
+    public function populate($rows) {
+        foreach($rows as $key=>$value) {
             $this->$key = $value;
         }
     }
