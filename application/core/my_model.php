@@ -23,11 +23,11 @@ class MY_Model extends CI_Model {
     }
     
     /**
-     * populate from an array pr standard class
+     * populate from an array or standard class
      * @param mixed $row
      */
     public function populate() {
-        foreach($row as $key => $value) {
+        foreach($row as $key=>$value) {
             $this->$key = $value;
         }
     }
@@ -78,7 +78,7 @@ class MY_Model extends CI_Model {
         else {
             $query = $this->db->get($this::DB_TABLE);
         }
-        $ret_vl = array();
+        $ret_val = array();
         $class = get_class($this);
         foreach ($query->result() as $row) {
             $model = new $class;
