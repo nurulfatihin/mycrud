@@ -95,7 +95,11 @@ class Users extends MY_Model {
     */
    public $picture;
    
-   public function set_users()
+   /**
+    * Register and create data
+    * @return type
+    */
+      public function set_users()
     {
 	$this->load->helper('url');
 
@@ -115,6 +119,57 @@ class Users extends MY_Model {
 
 	return $this->db->insert('users', $data);
     }
+    /**
+     * retrieve data from database
+     * @return type
+     */
+    function getAllUsers() {
+        $this->load->model("users");
+        $data = $this->db->get("users");
+        if($data->num_rows() > 0)
+        {
+            return $data->result();
+        }
+        return array();
+    }
+    
+    /**
+     * display data from selected id
+     * @param type $data
+     * @return type
+     */
+    function getUsersID($data){
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('id', $data);
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+    
+    /**
+     * Update the users
+     */
+    public function update_users_byAdmin() {
+        $this->load->databse();
+        $data = array(
+            'id'=>$this->input->post('id'),
+            'firstname'=>$this->input->post('firstname'),
+            'lastname'=>$this->input->post('lastname'),
+            'address'=>$this->input->post('address'),
+            'mobile_no'=>$this->input->post('mobile_no'),
+            'email'=>$this->input->post('email'),
+            'username'=>$this->input->post('username'),
+            'password'=>$this->input->post('password'),
+            'datestart'=>$this->input->post('datestart'),
+            'status'=>$this->input->post('status'),
+            'modified'=>$this->input->post('modified'),
+        );
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('users', $data);
+    }
+    
+    
    
 }
 
