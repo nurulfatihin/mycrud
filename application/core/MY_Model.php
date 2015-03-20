@@ -1,6 +1,7 @@
 <?php
 
 class MY_Model extends CI_Model {
+
     const DB_TABLE = 'abstract';
     const DB_TABLE_PK = 'abtract';
 
@@ -10,61 +11,65 @@ class MY_Model extends CI_Model {
     /**
      * Create record
      */
-    private function insert() {
+    private function insert()
+    {
         $this->db->insert($this::DB_TABLE, $this);
         $this->{$this::DB_TABLE_PK} = $this->db->insert_id();
     }
-    
+
     /**
      * Update record
-     
-    private function update() {
+     */
+    private function update()
+    {
         $this->db->update($this::DB_TABLE, $this, $this::DB_TABLE_PK);
-    }*/
-    
+    }
+
     /**
      * populate from an array or standard class
      * @param mixed $row
      */
-    public function populate($row) {
-        foreach($row as $key=>$value) {
+    public function populate($row)
+    {
+        foreach ($row as $key => $value) {
             $this->$key = $value;
         }
     }
-
 
     /**
      * Load from a database
      * @param int $id
      */
-    public function load($id) {
+    public function load($id)
+    {
         $query = $this->db->get_where($this::DB_TABLE, array(
             $this::DB_TABLE_PK => $id,
         ));
         $this->populate($query->row());
     }
-    
+
     /**
      * Delete current record
-     
-    public function delete() {
-        $this->db->delete($this::DB_TABLE, array(
-            $this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK},
-        ));
-        unset($this->{$this::DB_TABLE_PK});
-    }*/
+
+      public function delete() {
+      $this->db->delete($this::DB_TABLE, array(
+      $this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK},
+      ));
+      unset($this->{$this::DB_TABLE_PK});
+      } */
+
     /**
      * Save the record
      */
-    public function save() {
+    public function save()
+    {
         if (isset($this->{$this::DB_TABLE_PK})) {
             $this->update();
-        }
-        else {
+        } else {
             $this->insert();
         }
     }
-    
+
     /**
      * Get an array of Models with an optional limit, offset.
      * 
@@ -72,11 +77,11 @@ class MY_Model extends CI_Model {
      * @param int $offset Optionall if set, require $limit.
      * @return array Models populates by dtabase, keyed by PK.
      */
-    public function get($limit = 0, $offset = 0) {
-        if($limit) {
-            $query = $this->db->get($this::DB_TABLE,$limit, $offset);
-        }
-        else {
+    public function get($limit = 0, $offset = 0)
+    {
+        if ($limit) {
+            $query = $this->db->get($this::DB_TABLE, $limit, $offset);
+        } else {
             $query = $this->db->get($this::DB_TABLE);
         }
         $ret_val = array();
@@ -88,4 +93,5 @@ class MY_Model extends CI_Model {
         }
         return $ret_val;
     }
+
 }
