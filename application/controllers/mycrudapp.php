@@ -7,7 +7,7 @@ class Mycrudapp extends CI_Controller {
      * the parameter in the bracket is refer to any files in view.
      */
     public function index() {
-        $this->load->view('mycrudapps') ;
+        $this->load->view('users_form') ;
         $this->load->model('users');
     }
             
@@ -46,35 +46,33 @@ class Mycrudapp extends CI_Controller {
         
         $this->load->model('users');
         $data['records'] = $this->users->getAllUsers();
-        $this->load->view("admin_dashboard",$data);
-        
+        $this->load->view("admin_dashboard",$data);  
     }
     
-    function showUserID() {
+    public function edit($id) {
+        echo $id ;
+        $users = $this->Users->getUsersID($id);
+        if(!$users)
+        {
+            redirect("users");
+        }
+        if(@$_POST['update_user'])
+        {
+            $userdata=$_POST['users'];
+            $this->users->update($userdata,$id);
+            $this->session->set_flashdata('message', "Users updated succesfully");
+            redirect("users");
+        }
+        $data['users'] = $users;
+        $this->load->view("usersUpdate_byAdmin", $data);
+    }
+    
+    public function delete() {
         $id = $this->uri->segment(3);
-        $data['users'] = $this->users->getAllUsers();
-        $data['single_user'] = $this->users->showUserID($id);
-        $this->load->view('userUpdate_byAdmin', $data);
-    }
-    
-    public function updateUser() {
-        
-        $id = $this->input->post('id');
-               
-        $data = array(
-        'firstname'=>$this->input->post('firstname'),
-        'lastname'=>$this->input->post('lastname'),
-        'address'=>$this->input->post('address'),
-        'mobile_no'=>$this->input->post('mobile_no'),
-        'email'=>$this->input->post('email'),
-        'username'=>$this->input->post('username'),
-        'password'=>$this->input->post('password'),
-        'datestart'=>$this->input->post('datestart'),
-        'status'=>$this->input->post('status'),
-        );
-
-    $this->users->updateUser($id, $data);
-    $this->showUserID();
+        $this->user->delete($id);
+        $this->session->set_flashdata('message', "Users deleted succesfully");
+        redirect("users");
     }
 }
+   
 ?>

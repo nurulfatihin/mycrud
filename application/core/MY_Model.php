@@ -17,10 +17,10 @@ class MY_Model extends CI_Model {
     
     /**
      * Update record
-     */
+     
     private function update() {
         $this->db->update($this::DB_TABLE, $this, $this::DB_TABLE_PK);
-    }
+    }*/
     
     /**
      * populate from an array or standard class
@@ -46,13 +46,13 @@ class MY_Model extends CI_Model {
     
     /**
      * Delete current record
-     */
+     
     public function delete() {
         $this->db->delete($this::DB_TABLE, array(
             $this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK},
         ));
         unset($this->{$this::DB_TABLE_PK});
-    }
+    }*/
     /**
      * Save the record
      */

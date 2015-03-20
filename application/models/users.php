@@ -1,10 +1,8 @@
 <?php
-
 class Users extends MY_Model {
     
     const DB_TABLE = 'users';
     const DB_TABLE_PK ='id';
-
     /**
     * Users uniques identifier
     * @var int 
@@ -102,9 +100,7 @@ class Users extends MY_Model {
       public function set_users()
     {
 	$this->load->helper('url');
-
 	$slug = url_title($this->input->post('id'), 'dash', TRUE);
-
 	$data = array(
 		'id' => $this->input->post('id'),
 		'firstname' => $this->input->post('firstname'),
@@ -116,7 +112,6 @@ class Users extends MY_Model {
                 'password' => $this->input->post('password'),
                 'datestart' => $this->input->post('datestart'),                       
 	);
-
 	return $this->db->insert('users', $data);
     }
     /**
@@ -172,4 +167,3 @@ class Users extends MY_Model {
     
    
 }
-
