@@ -3,13 +3,10 @@
 class MY_Model extends CI_Model {
 
     const DB_TABLE = 'abstract';
-    const DB_TABLE_PK = 'abtract';
-
-    //private $db;
-    //private $row;
+    const DB_TABLE_PK = 'abstract';
 
     /**
-     * Create record
+     * Create record.
      */
     private function insert()
     {
@@ -18,15 +15,15 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * Update record
+     * Update record.
      */
     private function update()
     {
-        $this->db->update($this::DB_TABLE, $this, $this::DB_TABLE_PK);
+        $this->db->update($this::DB_TABLE, $this, array($this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK}));
     }
 
     /**
-     * populate from an array or standard class
+     * Populate from an array or standard class.
      * @param mixed $row
      */
     public function populate($row)
@@ -37,7 +34,7 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * Load from a database
+     * Load from the database.
      * @param int $id
      */
     public function load($id)
@@ -49,17 +46,18 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * Delete current record
-
-      public function delete() {
-      $this->db->delete($this::DB_TABLE, array(
-      $this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK},
-      ));
-      unset($this->{$this::DB_TABLE_PK});
-      } */
+     * Delete the current record.
+     */
+    public function delete()
+    {
+        $this->db->delete($this::DB_TABLE, array(
+            $this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK},
+        ));
+        unset($this->{$this::DB_TABLE_PK});
+    }
 
     /**
-     * Save the record
+     * Save the record.
      */
     public function save()
     {
@@ -74,8 +72,8 @@ class MY_Model extends CI_Model {
      * Get an array of Models with an optional limit, offset.
      * 
      * @param int $limit Optional.
-     * @param int $offset Optionall if set, require $limit.
-     * @return array Models populates by dtabase, keyed by PK.
+     * @param int $offset Optional; if set, requires $limit.
+     * @return array Models populated by database, keyed by PK.
      */
     public function get($limit = 0, $offset = 0)
     {
