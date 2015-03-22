@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Mycrudapp extends CI_Controller {
+class Admin extends CI_Controller {
 
     private $view_data = array();
 
