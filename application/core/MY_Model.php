@@ -8,15 +8,23 @@ class MY_Model extends CI_Model {
     /**
      * Create record.
      */
-    private function insert() {
+    private function insert()
+    {
         $this->db->insert($this::DB_TABLE, $this);
         $this->{$this::DB_TABLE_PK} = $this->db->insert_id();
     }
 
     /**
+<<<<<<< HEAD
      * Update record
      */
     private function update() {
+=======
+     * Update record.
+     */
+    private function update()
+    {
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         $this->db->update($this::DB_TABLE, $this, array($this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK}));
     }
 
@@ -24,17 +32,27 @@ class MY_Model extends CI_Model {
      * Populate from an array or standard class.
      * @param mixed $row
      */
+<<<<<<< HEAD
     public function populate($row) {
+=======
+    public function populate($row)
+    {
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         foreach ($row as $key => $value) {
             $this->$key = $value;
         }
     }
 
     /**
+<<<<<<< HEAD
      * Load from the database
+=======
+     * Load from the database.
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
      * @param int $id
      */
-    public function load($id) {
+    public function load($id)
+    {
         $query = $this->db->get_where($this::DB_TABLE, array(
             $this::DB_TABLE_PK => $id,
         ));
@@ -42,9 +60,16 @@ class MY_Model extends CI_Model {
     }
 
     /**
+<<<<<<< HEAD
      * Delete current record
      */
     public function delete() {
+=======
+     * Delete the current record.
+     */
+    public function delete()
+    {
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         $this->db->delete($this::DB_TABLE, array(
             $this::DB_TABLE_PK => $this->{$this::DB_TABLE_PK},
         ));
@@ -52,9 +77,10 @@ class MY_Model extends CI_Model {
     }
 
     /**
-     * Save the record
+     * Save the record.
      */
-    public function save() {
+    public function save()
+    {
         if (isset($this->{$this::DB_TABLE_PK})) {
             $this->update();
         } else {
@@ -66,10 +92,15 @@ class MY_Model extends CI_Model {
      * Get an array of Models with an optional limit, offset.
      * 
      * @param int $limit Optional.
-     * @param int $offset Optionall if set, require $limit.
-     * @return array Models populates by dtabase, keyed by PK.
+     * @param int $offset Optional; if set, requires $limit.
+     * @return array Models populated by database, keyed by PK.
      */
+<<<<<<< HEAD
     public function get($limit = 0, $offset = 0) {
+=======
+    public function get($limit = 0, $offset = 0)
+    {
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         if ($limit) {
             $query = $this->db->get($this::DB_TABLE, $limit, $offset);
         } else {

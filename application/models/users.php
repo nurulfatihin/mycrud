@@ -41,6 +41,10 @@ class Users extends MY_Model {
      */
     public $mobile_no;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
     /**
      * Users username
      * @var varchar 
@@ -77,6 +81,10 @@ class Users extends MY_Model {
      */
     public $modified;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
     /**
      * Users username
      * @var varchar 
@@ -87,7 +95,12 @@ class Users extends MY_Model {
      * Register and create data
      * @return type
      */
+<<<<<<< HEAD
     public function set_users() {
+=======
+    public function set_users()
+    {
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         $this->load->helper('url');
         $slug = url_title($this->input->post('id'), 'dash', TRUE);
         $data = array(
@@ -108,7 +121,8 @@ class Users extends MY_Model {
      * retrieve data from database
      * @return type
      */
-    function getAllUsers() {
+    function getAllUsers()
+    {
         $this->load->model("users");
         $data = $this->db->get("users");
         if ($data->num_rows() > 0) {
@@ -122,11 +136,19 @@ class Users extends MY_Model {
      * @param type $data
      * @return type
      */
+<<<<<<< HEAD
     function getUsersByID($data) {
 
+=======
+    function getUserByID($data)
+    {
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         $this->db->where('id', $data);
         $query = $this->db->get('users');
         return $query->row();
     }
 }
+<<<<<<< HEAD
     
+=======
+>>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
