@@ -35,8 +35,8 @@ if($this->session->flashdata('message')){
             <td><?= $row->datestart ?></td>
             <td><?= $row->status ?></td>
             <td><?= $row->modified ?></td>
-            <td><a href ="<?= site_url("mycrudapp/edit/" . $row->id) ?>">Edit</a>|
-                <a href ="<?= site_url("mycrudapp/delete/" . $row->id) ?>">Delete</a></td>
+            <td><a href ="<?= site_url("admin/edit/" . $row->id) ?>">Edit</a>|
+                <a href ="<?= site_url("admin/delete/" . $row->id) ?>">Delete</a></td>
         </tr>
         <?php
     endforeach;

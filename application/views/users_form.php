@@ -4,7 +4,7 @@
 <form method="post">
     <div>
         <label for="firstname">First Name</label>
-        <input type="text" name="firstname" value=""/>
+        <input type="text" name="firstname" value="<?php echo set_value('firstname'); ?>"/>
     </div>
     
     <div>
@@ -34,7 +34,7 @@
     
     <div>
         <label for="password">Password</label>
-        <input type="text" name="password" value=""/>
+        <input type="password" name="password" value=""/>
     </div>
     
     <div>

@@ -87,10 +87,8 @@ class Users extends MY_Model {
      * Register and create data
      * @return type
      */
-
     public function set_users()
     {
-
         $this->load->helper('url');
         $slug = url_title($this->input->post('id'), 'dash', TRUE);
         $data = array(
@@ -106,7 +104,6 @@ class Users extends MY_Model {
         );
         return $this->db->insert('users', $data);
     }
-
     /**
      * retrieve data from database
      * @return type

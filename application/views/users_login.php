@@ -1,5 +1,5 @@
 <?php echo validation_errors();?>
-<?php echo form_open('user/users_login') ?>
+<?php echo form_open('user/check_database') ?>
 
 <h1> Staff Login</h1>
 
@@ -18,6 +18,6 @@
 </div>
 
 <div>
-    <a href="user_registration_show">To SignUp Click Here</a>
+    <a href="user/create">To SignUp Click Here</a>
 </div>
 <?php echo form_close(); ?>

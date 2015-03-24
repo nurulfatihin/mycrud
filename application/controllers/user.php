@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -55,8 +56,8 @@ class User extends CI_Controller {
             $this->load->view('users_form_success');
         }
     }
-    
-     public function getUsers() {
+
+    public function getUsers() {
 
         $this->load->model('users');
         $data['users'] = $this->Users->get();
@@ -92,7 +93,6 @@ class User extends CI_Controller {
                 /**
                  * Update the record
                  */
-                
                 $user->firstname = $this->input->post('firstname');
                 $user->lastname = $this->input->post('lastname');
                 $user->address = $this->input->post('address');
@@ -113,5 +113,36 @@ class User extends CI_Controller {
          */
         $this->view_data['user'] = $user;
         $this->load->view("userupdate_admin", $this->view_data);
-}}
+    }
+
+    function check_database($password)
+ {
+   //Field validation succeeded.  Validate against database
+   $username = $this->input->post('username');
+ 
+   //query the database
+   $result = $this->user->login($username, $password);
+ 
+   if($result)
+   {
+     $sess_array = array();
+     foreach($result as $row)
+     {
+       $sess_array = array(
+         'id' => $row->id,
+         'username' => $row->username
+       );
+       $this->session->set_userdata('logged_in', $sess_array);
+     }
+     return TRUE;
+   }
+   else
+   {
+     $this->form_validation->set_message('check_database', 'Invalid username or password');
+     return false;
+   }
+ }
+}
+
+
 ?>
