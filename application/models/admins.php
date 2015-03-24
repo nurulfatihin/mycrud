@@ -1,6 +1,5 @@
 <?php
-
-class Admin extends MY_Model {
+class Admins extends MY_Model {
     
     const DB_TABLE = 'admin';
     const DB_TABLE_PK ='admin_id';

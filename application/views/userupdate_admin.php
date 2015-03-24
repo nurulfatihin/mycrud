@@ -16,7 +16,6 @@
         </p>
         <p>    
             <label>Last Name :</label>
-<<<<<<< HEAD
             <input type="text" name="lastname" value="<?php echo set_value('lastname', $user->lastname); ?>">
         </p>
         <p>
@@ -46,7 +45,6 @@
         <p>
             <label>Status :</label>
             <input type="text" name="status" value="<?php echo set_value('status', $user->status); ?>">
-=======
             <input type="text" name="lastname" value="<?php echo $user->lastname; ?>">
         </p>
         <p>
@@ -76,7 +74,6 @@
         <p>
             <label>Status :</label>
             <input type="text" name="status" value="<?php echo $user->status; ?>">
->>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         </p>
         <p>
             <input type="submit" name="submit" value="Save"/>
@@ -84,7 +81,4 @@
         <?php echo form_close(); ?>
     </body>
 </html>
-<<<<<<< HEAD
-=======
 
->>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f

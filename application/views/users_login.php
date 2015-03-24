@@ -1,5 +1,5 @@
 <?php echo validation_errors();?>
-<?php echo form_open('mycrudapp/users_login') ?>
+<?php echo form_open('user/users_login') ?>
 
 <h1> Staff Login</h1>
 

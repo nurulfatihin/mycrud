@@ -1,5 +1,5 @@
 <?php echo validation_errors();?>
-<?php echo form_open('mycrudapp/create') ?>
+<?php echo form_open('user/create') ?>
 <h1> Users Registration</h1>
 <form method="post">
     <div>

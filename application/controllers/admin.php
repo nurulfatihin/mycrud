@@ -15,46 +15,11 @@ class Admin extends CI_Controller {
      * the parameter in the bracket is refer to any files in view.
      */
     public function index() {
-        $this->load->view('users_form');
+        $this->load->view('admin_login');
+        $this->load->model('admins');
         $this->load->model('users');
     }
 
-    /**
-     * Insert a new data into table users in the database
-     */
-    public function create() {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        $data['users'] = '$id';
-
-        $this->form_validation->set_rules('firstname', 'First name', 'required');
-        $this->form_validation->set_rules('lastname', 'Last name', 'required');
-        $this->form_validation->set_rules('address', 'Address', 'required');
-        $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('datestart', 'datestart', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('users_form');
-        } else {
-
-            $users = new Users();
-            $users->firstname = $this->input->post('firstname');
-            $users->lastname = $this->input->post('lastname');
-            $users->address = $this->input->post('address');
-            $users->mobile_no = $this->input->post('mobile_no');
-            $users->email = $this->input->post('email');
-            $users->username = $this->input->post('username');
-            $users->password = $this->input->post('password');
-            $users->datestart = $this->input->post('datestart');
-
-            $users->save();
-            $this->load->view('users_form_success');
-        }
-    }
 
     public function getUsers() {
 
@@ -72,7 +37,7 @@ class Admin extends CI_Controller {
         $user->load($id);
 
         if (!isset($user->id)) {
-            redirect("mycrudapp/getUsers");
+            redirect("admin/getUsers");
         }
 
         /**
@@ -104,7 +69,7 @@ class Admin extends CI_Controller {
                 $user->save();
 
                 $this->session->set_flashdata('message', "Users information updated succesfully");
-                redirect("mycrudapp/getUsers");
+                redirect("admin/getUsers");
             }
         }
 
@@ -112,7 +77,7 @@ class Admin extends CI_Controller {
          * pass $user to view
          */
         $this->view_data['user'] = $user;
-        $this->load->view("usersUpdate_byAdmin", $this->view_data);
+        $this->load->view("userupdate_admin", $this->view_data);
     }
 
     public function delete($id = FALSE) {
@@ -124,7 +89,7 @@ class Admin extends CI_Controller {
         $user->delete();
 
         $this->session->set_flashdata('message', "Users infromation is successfully deleted");
-        redirect("mycrudapp/getUsers");
+        redirect("admin/getUsers");
     }
 
 }

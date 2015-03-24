@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
-if ($this->session->flashdata('message')) {
-=======
 if($this->session->flashdata('message')){
->>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
     echo $this->session->flashdata('message');
 }
 ?>
@@ -24,12 +20,9 @@ if($this->session->flashdata('message')){
         <th>Action</th>
     </tr>
     <?php
-<<<<<<< HEAD
-    foreach ($users as $row):
-=======
+
     foreach ($records as $row):
->>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
-        ?>
+    ?>
         <tr>
             <td><?= $row->id ?></td>
             <td><?= $row->firstname ?></td>
@@ -43,11 +36,7 @@ if($this->session->flashdata('message')){
             <td><?= $row->status ?></td>
             <td><?= $row->modified ?></td>
             <td><a href ="<?= site_url("mycrudapp/edit/" . $row->id) ?>">Edit</a>|
-<<<<<<< HEAD
-                <a href ="<?= site_url("/mycrudapp/delete/" . $row->id) ?>">Delete</a></td>
-=======
                 <a href ="<?= site_url("mycrudapp/delete/" . $row->id) ?>">Delete</a></td>
->>>>>>> e524837cb8ed96fa3ced288ad3af750fe6f7bf9f
         </tr>
         <?php
     endforeach;

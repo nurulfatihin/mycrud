@@ -1,5 +1,5 @@
 <?php echo validation_errors();?>
-<?php echo form_open('mycrudapp/admin_login') ?>
+<?php echo form_open('admins/admin_login') ?>
 
 <h1> Admin Login</h1>
 
