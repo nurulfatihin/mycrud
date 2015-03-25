@@ -1,5 +1,5 @@
 <?php echo validation_errors();?>
-<?php echo form_open('user/check_database') ?>
+<?php echo form_open('user/user_login_process') ?>
 
 <h1> Staff Login</h1>
 

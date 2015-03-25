@@ -9,7 +9,7 @@ class User extends CI_Controller {
 
     public function __constructs() {
         parent::__construct();
-        $this->load->model('login/users');
+        $this->load->model('users');
     }
 
     /**
@@ -112,7 +112,7 @@ class User extends CI_Controller {
          * pass $user to view
          */
         $this->view_data['user'] = $user;
-        $this->load->view("userupdate_admin", $this->view_data);
+        $this->load->view("user_update_form", $this->view_data);
     }
 
     public function user_login_process() {
@@ -148,7 +148,7 @@ class User extends CI_Controller {
                 redirect('users');
             } else {
                 $data = array(
-                    'error_message' => 'Invalid Usernane or Password'
+                    'error_message' => 'Invalid Usernamse or Password'
                 );
                 $this->load->view('users_login', $data);
             }
