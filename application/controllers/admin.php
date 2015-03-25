@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -20,6 +21,31 @@ class Admin extends CI_Controller {
         $this->load->model('users');
     }
 
+    /**
+     * Login process
+     */
+    function check_database($password) {
+        //Field validation succeeded.  Validate against database
+        $username = $this->input->post('username');
+
+        //query the database
+        $result = $this->user->login($username, $password);
+
+        if ($result) {
+            $sess_array = array();
+            foreach ($result as $row) {
+                $sess_array = array(
+                    'admin_id' => $row->id,
+                    'username' => $row->username
+                );
+                $this->session->set_userdata('logged_in', $sess_array);
+            }
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('check_database', 'Invalid username or password');
+            return false;
+        }
+    }
 
     public function getUsers() {
 
@@ -57,7 +83,6 @@ class Admin extends CI_Controller {
                 /**
                  * Update the record
                  */
-                
                 $user->firstname = $this->input->post('firstname');
                 $user->lastname = $this->input->post('lastname');
                 $user->address = $this->input->post('address');
@@ -91,6 +116,60 @@ class Admin extends CI_Controller {
         $this->session->set_flashdata('message', "Users infromation is successfully deleted");
         redirect("admin/getUsers");
     }
+    
+    public function user_login_process() {
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('admin_login');
+        } else {
+            $data = array(
+                'admin_username' => $this->input->post('admin_username'),
+                'admin_password' => $this->input->post('admin_password')
+            );
+            $result = $this->login_database->login($data);
+            if ($result == TRUE) {
+                $sess_array = array(
+                    'admin_username' => $this->input->post('admin_username')
+                );
+            }$this->session->set_users('logged_in', $sess_array);
+            $result = $this->login_database->getUsers($sess_array);
+            if ($result != false) {
+                $data = array(
+                    'firstname' => $result[0]->firstname,
+                    'lastname' => $result[0]->lastname,
+                    'address' => $result[0]->address,
+                    'mobile_no' => $result[0]->mobile_no,
+                    'email' => $result[0]->email,
+                    'username' => $result[0]->username,
+                    'password' => $result[0]->password,
+                    'datestart' => $result[0]->datestart,
+                    'status' => $result[0]->status,
+                );
+                redirect('admin');
+            } else {
+                $data = array(
+                    'error_message' => 'Invalid Usernane or Password'
+                );
+                $this->load->view('admin_login', $data);
+            }
+        }
+    }
+
+    // Logout from user page
+    public function logout() {
+
+    // Removing session data
+        $sess_array = array(
+            'admin_username' => ''
+        );
+        $this->session->unset_userdata('logged_in', $sess_array);
+        $data['message_display'] = 'Successfully Logout';
+        $this->load->view('admin_dashboard', $data);
+    }
+
 
 }
+
 ?>

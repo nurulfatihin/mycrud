@@ -4,6 +4,9 @@
     </head>
     <body>
         <h1>Editting</h1>
+        <h2>
+            <a href="user/create">Logout</a>
+        </h2>
         <?php echo form_open('user/edit/' . $user->id); ?>
         <p>
             <label>Id :</label>
