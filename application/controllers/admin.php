@@ -117,7 +117,7 @@ class Admin extends CI_Controller {
         redirect("admin/getUsers");
     }
     
-    public function user_login_process() {
+   /** public function user_login_process() {
         $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
@@ -137,7 +137,7 @@ class Admin extends CI_Controller {
             $result = $this->login_database->getUsers($sess_array);
             if ($result != false) {
                 $data = array(
-                    'firstname' => $result[0]->firstname,
+                    'firstname' => $result[1]->firstname,
                     'lastname' => $result[0]->lastname,
                     'address' => $result[0]->address,
                     'mobile_no' => $result[0]->mobile_no,
@@ -167,7 +167,7 @@ class Admin extends CI_Controller {
         $this->session->unset_userdata('logged_in', $sess_array);
         $data['message_display'] = 'Successfully Logout';
         $this->load->view('admin_dashboard', $data);
-    }
+    }*/
 
 
 }

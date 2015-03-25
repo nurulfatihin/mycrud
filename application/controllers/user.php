@@ -9,7 +9,7 @@ class User extends CI_Controller {
 
     public function __constructs() {
         parent::__construct();
-        $this->load->model('users');
+        
     }
 
     /**
@@ -17,7 +17,8 @@ class User extends CI_Controller {
      * the parameter in the bracket is refer to any files in view.
      */
     public function index() {
-        $this->load->view('users_login');
+        $this->load->view('users_form');
+        $this->load->model('users');
     }
 
     /**
@@ -53,7 +54,7 @@ class User extends CI_Controller {
             $users->datestart = $this->input->post('datestart');
 
             $users->save();
-            $this->load->view('users_form_success');
+            $this->load->view('user_dashboard');
         }
     }
 
@@ -115,7 +116,7 @@ class User extends CI_Controller {
         $this->load->view("user_update_form", $this->view_data);
     }
 
-    public function user_login_process() {
+    /**public function user_login_process() {
         $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
@@ -165,7 +166,7 @@ class User extends CI_Controller {
         $this->session->unset_userdata('logged_in', $sess_array);
         $data['message_display'] = 'Successfully Logout';
         $this->load->view('user_form', $data);
-    }
+    }*/
 
 }
 

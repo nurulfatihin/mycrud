@@ -4,7 +4,7 @@
 <form method="post">
     <div>
         <label for="firstname">First Name</label>
-        <input type="text" name="firstname" value="<?php echo set_value('firstname'); ?>"/>
+        <input type="text" name="firstname" value=""/>
     </div>
     
     <div>
