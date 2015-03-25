@@ -21,7 +21,7 @@ if($this->session->flashdata('message')){
     </tr>
     <?php
 
-    foreach ($records as $row):
+    foreach ($users as $row):
     ?>
         <tr>
             <td><?= $row->id ?></td>
