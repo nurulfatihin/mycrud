@@ -1,5 +1,5 @@
 <?php
-if($this->session->flashdata('message')){
+if ($this->session->flashdata('message')) {
     echo $this->session->flashdata('message');
 }
 ?>
@@ -20,13 +20,8 @@ if($this->session->flashdata('message')){
         <th>Action</th>
     </tr>
     <?php
-
-<<<<<<< HEAD
-    foreach ($user as $row):
-=======
     foreach ($users as $row):
->>>>>>> e8b2cd782b06d1cb2261e7f88a776d17b4530d9e
-    ?>
+        ?>
         <tr>
             <td><?= $row->id ?></td>
             <td><?= $row->firstname ?></td>

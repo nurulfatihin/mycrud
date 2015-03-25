@@ -49,8 +49,8 @@ class Admin extends CI_Controller {
 
     public function getUsers() {
 
-        $this->load->model('Users');
-        $data['users'] = $this->Users->get();
+        $this->load->model('users');
+        $data['users'] = $this->users->get();
         $this->load->view("admin_dashboard", $data);
     }
 
