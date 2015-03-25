@@ -5,7 +5,7 @@
     <body>
         <h1>Editting</h1>
         <h2>
-            <a href="user/create">Logout</a> |
+            <a href="user_form">Logout</a> |
             <a href="user/edit"> Update</a>
         </h2>
         <?php echo form_open('user/edit/' . $user->id); ?>
