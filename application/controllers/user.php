@@ -17,8 +17,8 @@ class User extends CI_Controller {
      * the parameter in the bracket is refer to any files in view.
      */
     public function index() {
-        $this->load->view('users_form');
-        $this->load->model('users');
+        $this->load->view('users_login');
+        
     }
 
     /**
@@ -27,7 +27,8 @@ class User extends CI_Controller {
     public function create() {
         $this->load->helper('form');
         $this->load->library('form_validation');
-
+        
+        $this->load->model('Users');
         $data['users'] = '$id';
 
         $this->form_validation->set_rules('firstname', 'First name', 'required');
@@ -54,15 +55,15 @@ class User extends CI_Controller {
             $users->datestart = $this->input->post('datestart');
 
             $users->save();
-            $this->load->view('user_dashboard');
+           redirect("user/getUsers");
         }
     }
 
     public function getUsers() {
 
         $this->load->model('Users');
-        $data['users'] = $this->Users->get();
-        $this->load->view("admin_dashboard", $data);
+        $data = $this->Users->get();
+        $this->load->view("user_dashboard", $data);
     }
 
     public function edit($id = FALSE) {
@@ -70,7 +71,7 @@ class User extends CI_Controller {
         /**
          * load single user record and assign to $user variable
          */
-        $user = new Users();
+        $user = new users();
         $user->load($id);
 
         if (!isset($user->id)) {

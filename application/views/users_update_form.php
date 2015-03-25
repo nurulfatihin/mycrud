@@ -43,6 +43,10 @@
             <input type="text" name="status" value="<?php echo set_value('status', $user->status); ?>">
         </p>
         
+        <p>
+            <input type="submit" name="submit" value="Save"/>
+        </p>
+        
         <?php echo form_close(); ?>
     </body>
 </html>

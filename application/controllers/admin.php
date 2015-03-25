@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
     public function index() {
         $this->load->view('admin_login');
         $this->load->model('admins');
-        $this->load->model('users');
+        $this->load->model('Users');
     }
 
     /**
@@ -49,8 +49,8 @@ class Admin extends CI_Controller {
 
     public function getUsers() {
 
-        $this->load->model('users');
-        $data['users'] = $this->users->get();
+        $this->load->model('Users');
+        $data['users'] = $this->Users->get();
         $this->load->view("admin_dashboard", $data);
     }
 
@@ -59,6 +59,7 @@ class Admin extends CI_Controller {
         /**
          * load single user record and assign to $user variable
          */
+        $this->load->model('Users');
         $user = new Users();
         $user->load($id);
 
@@ -109,6 +110,7 @@ class Admin extends CI_Controller {
         /**
          * load user
          */
+        $this->load->model('Users');
         $user = new Users();
         $user->load($id);
         $user->delete();
