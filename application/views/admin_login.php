@@ -1,22 +1,22 @@
 <?php echo validation_errors();?>
-<?php echo form_open('admins/check_database') ?>
+<?php echo form_open('admin/user_login_process') ?>
 
 <h1> Admin Login</h1>
-
+<form method="post">
 <div>
     <label>UserName :</label>
-    <input type="text" name="username" id="name" placeholder="username"/>
+    <input type="text" name="admin_username" value=""/>
 </div>
 
 <div>
     <label>Password :</label>
-    <input type="password" name="password" id="password" placeholder="**********"/>
+    <input type="password" name="admin_password" value=""/>
 </div>
 
 <div>
     <input type="submit" value=" Login " name="submit"/>
 </div>
-
+</form>
 <?php echo form_close(); ?><?php
 
 /* 

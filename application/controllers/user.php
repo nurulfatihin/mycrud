@@ -62,7 +62,7 @@ class User extends CI_Controller {
 
         $this->load->model('Users');
         $data['users'] = $this->Users->get();
-        $this->load->view("user_dashboard", $data);
+        $this->load->view("user/user_dashboard", $data);
     }
 
     public function edit($id = FALSE) {
@@ -127,7 +127,8 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('users_login');
         } else {
-            redirect('user_dashboard');
+            
+            redirect('user/user_dashboard');
             
             }
 }
