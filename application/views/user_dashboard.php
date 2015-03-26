@@ -7,47 +7,47 @@
         
         <p>
             <label>Id :</label>
-            <label>"<?php echo  $data->id; ?>"</label>>
+            <label>"<?php echo  $users->id; ?>"</label>>
         </p>
         <p>
             <label>First Name :</label>
-            <label>"<?php echo set_value('firstname', $data->firstname); ?>"</label>>
+            <label>"<?php echo set_value('firstname', $users->firstname); ?>"</label>>
         </p>
         <p>    
             <label>Last Name :</label>
-            <label>"<?php echo set_value('lastname', $data->lastname); ?>"</label>
+            <label>"<?php echo set_value('lastname', $users->lastname); ?>"</label>
         </p>
         <p>
             <label>Address :</label>
-            <label>"<?php echo set_value('address', $data->address); ?>"</label>
+            <label>"<?php echo set_value('address', $users->address); ?>"</label>
         </p>
         <p>
             <label>Email :</label>
-            <label>"<?php echo set_value('email', $data->email); ?>"</label>
+            <label>"<?php echo set_value('email', $users->email); ?>"</label>
         </p>
         <p>
             <label>Mobile Number :</label>
-            <label>"<?php echo set_value('mobile_no', $data->mobile_no); ?>"</label>
+            <label>"<?php echo set_value('mobile_no', $users->mobile_no); ?>"</label>
         </p>
         <p>
             <label>Username :</label>
-            <label>"<?php echo set_value('username', $data->username); ?>"></label>
+            <label>"<?php echo set_value('username', $users->username); ?>"></label>
         </p>
         <p>
             <label>Password :</label>
-            <label>"<?php echo set_value('password', $data->password); ?>"</label>
+            <label>"<?php echo set_value('password', $users->password); ?>"</label>
         </p>
         <p>
             <label>Date Start :</label>
-            <label>"<?php echo set_value('datestart', $data->datestart); ?>"></label>
+            <label>"<?php echo set_value('datestart', $users->datestart); ?>"></label>
         </p>
         <p>
             <label>Status :</label>
-            <label>"<?php echo set_value('status', $data->status); ?>"</label>  
+            <label>"<?php echo set_value('status', $users->status); ?>"</label>  
         </p>
         
-        <p><a href ="<?= site_url("user/edit/" . $data->id) ?>">Edit</a>|
-                <a href ="<?= site_url("user_login" . $data->id) ?>">Logout</a>
+        <p><a href ="<?= site_url("user/edit/" . $users->id) ?>">Edit</a>|
+                <a href ="<?= site_url("user_login" . $users->id) ?>">Logout</a>
         </p>
     </body>
 </html>
