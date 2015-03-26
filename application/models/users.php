@@ -104,6 +104,7 @@ class Users extends MY_Model {
         );
         return $this->db->insert('users', $data);
     }
+
     /**
      * retrieve data from database
      * @return type
@@ -123,7 +124,6 @@ class Users extends MY_Model {
      * @param type $data
      * @return type
      */
-
     function getUserByID($data)
     {
 
@@ -131,5 +131,18 @@ class Users extends MY_Model {
         $query = $this->db->get('users');
         return $query->row();
     }
-}
 
+    public function check_credential($username, $password)
+    {
+        $query = $this->db->get_where($this::DB_TABLE, array(
+            'username' => $username,
+            'password' => $password,
+        ));
+        $result = $query->row();
+        if (isset($result->id)) {
+            return $result;
+        }
+        return FALSE;
+    }
+
+}

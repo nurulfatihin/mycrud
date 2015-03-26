@@ -7,7 +7,8 @@ class User extends CI_Controller {
 
     private $view_data = array();
 
-    public function __constructs() {
+    public function __constructs()
+    {
         parent::__construct();
     }
 
@@ -15,14 +16,16 @@ class User extends CI_Controller {
      * Load this function when visit mycrud.local
      * the parameter in the bracket is refer to any files in view.
      */
-    public function index() {
+    public function index()
+    {
         $this->load->view('users_login');
     }
 
     /**
      * Insert a new data into table users in the database
      */
-    public function create() {
+    public function create()
+    {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -58,14 +61,16 @@ class User extends CI_Controller {
         }
     }
 
-    public function getUsers() {
+    public function getUsers()
+    {
 
         $this->load->model('Users');
         $data['users'] = $this->Users->get();
         $this->load->view("user/user_dashboard", $data);
     }
 
-    public function edit($id = FALSE) {
+    public function edit($id = FALSE)
+    {
 
         /**
          * load single user record and assign to $user variable
@@ -116,69 +121,59 @@ class User extends CI_Controller {
         $this->load->view("user_update_form", $this->view_data);
     }
 
-    public function user_login_process() {
+    public function user_login_process()
+    {
 
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->model('Users');
+        $this->load->model('users');
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('users_login');
         } else {
-            
-            redirect('user/user_dashboard');
-            
+            $user = $this->users->check_credential($this->input->post('username'), $this->input->post('password'));
+            if ($user !== FALSE) {
+                $sess_array = array(
+                    'id' => $user->id,
+                    'username' => $user->username
+                );
+                $this->session->set_userdata('logged_in', $sess_array);
+                redirect('user/user_dashboard');
+            } else {
+                //show invalid username/password
+                redirect('user');
             }
+        }
+    }
+
+    public function user_dashboard()
+    {
+        //get session data
+        $logged_in = $this->session->userdata('logged_in');
+
+        //check if session data is not exist/user is not log in. redirect them to login page
+        if ($logged_in === FALSE) {
+            redirect('user');
+        }
+        
+        //your rest of code here
+    }
+
 }
-        
-        /**
-         * Checking database
-         */
-        public function check_database($password) {
-            //field validation succeeded. Validate against the database.
-            $username=$this->input->post('username');
-            
-            //query the database(from model)
-            $result = $this->Users->login($username, $password);
-            print_r($result);
-            if($result) {
-                $sess_array = array();
-                foreach($result as $row)
-                {
-                    $sess_array = array(
-                        'id' => $row->id,
-                        'username' => $row->username
-                    );
-                    $this->session->set_userdata(logged_in, $sess_array);
-                }
-                return TRUE;
-            }
-            else{
-                $this->form_validation->set_message('check_database', 'Invalid username or password');
-                return FALSE;
-}}}
 
-        
-    
-    
+/** Logout from user page
+  public function logout() {
 
-    
+  // Removing session data
+  $sess_array = array(
+  'username' => ''
+  );
+  $this->session->unset_userdata('logged_in', $sess_array);
+  $data['message_display'] = 'Successfully Logout';
+  $this->load->view('user_form', $data);
+  }
 
-      /** Logout from user page
-      public function logout() {
-
-      // Removing session data
-      $sess_array = array(
-      'username' => ''
-      );
-      $this->session->unset_userdata('logged_in', $sess_array);
-      $data['message_display'] = 'Successfully Logout';
-      $this->load->view('user_form', $data);
-      }
-
-     */
-
-
+ */
 ?>
