@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label>Username :</label>
                 <input type="text" name="username" value="" class="form-control"/>
-            </p>
+            </div>
 
             <p>
                 <label>Password :</label>
