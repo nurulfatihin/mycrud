@@ -22,7 +22,6 @@
                     <label>Username :</label>
                     <input class="form-control" type="text" name="username" value="" />
                 </div>
-
                 <div class="form-group">
                     <label>Password :</label>
                     <input class="form-control" type="password" name="password" value=""/>
