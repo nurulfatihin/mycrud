@@ -17,36 +17,15 @@ class Admin extends CI_Controller {
      */
     public function index() {
         $this->load->view('admin_login');
-        $this->load->model('admins');
-        $this->load->model('Users');
     }
 
     /**
-     * Login process
-     */
-    function check_database($password) {
-        //Field validation succeeded.  Validate against database
-        $username = $this->input->post('username');
+     * search function
 
-        //query the database
-        $result = $this->user->login($username, $password);
-
-        if ($result) {
-            $sess_array = array();
-            foreach ($result as $row) {
-                $sess_array = array(
-                    'admin_id' => $row->id,
-                    'username' => $row->username
-                );
-                $this->session->set_userdata('logged_in', $sess_array);
-            }
-            return TRUE;
-        } else {
-            $this->form_validation->set_message('check_database', 'Invalid username or password');
-            return false;
-        }
-    }
-
+      public function searchUser() {
+      $data['query'] = $this->Users->getSearch();
+      $this->load->view('users', $data);
+      } */
     public function getUsers() {
 
         $this->load->model('Users');
@@ -71,14 +50,15 @@ class Admin extends CI_Controller {
          * check if button submit is triggered
          */
         if (isset($_POST['submit'])) {
-            $this->form_validation->set_rules('firstname', 'First name', 'required');
-            $this->form_validation->set_rules('lastname', 'Last name', 'required');
+            $this->form_validation->set_rules('firstname', 'First name', 'required|alpha');
+            $this->form_validation->set_rules('lastname', 'Last name', 'required|alpha');
             $this->form_validation->set_rules('address', 'Address', 'required');
-            $this->form_validation->set_rules('mobile_no', 'Mobile Phone No.', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required');
-            $this->form_validation->set_rules('username', 'Username', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
             $this->form_validation->set_rules('datestart', 'datestart', 'required');
+            $this->form_validation->set_rules('status', 'Status', 'required');
 
             if ($this->form_validation->run() === TRUE) {
                 /**
@@ -92,6 +72,7 @@ class Admin extends CI_Controller {
                 $user->username = $this->input->post('username');
                 $user->password = $this->input->post('password');
                 $user->datestart = $this->input->post('datestart');
+                $user->status = $this->input->post('status');
                 $user->save();
 
                 $this->session->set_flashdata('message', "Users information updated succesfully");
@@ -119,59 +100,57 @@ class Admin extends CI_Controller {
         redirect("admin/getUsers");
     }
 
-    public function user_login_process() {
+    public function admin_login_process() {
 
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->model('Admins');
+        $this->load->model('admins');
         $this->form_validation->set_rules('admin_username', 'Username', 'required');
         $this->form_validation->set_rules('admin_password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin_login');
         } else {
-
-            redirect('admin/admin_dashboard');
+            $admin = $this->admins->check_credential($this->input->post('admin_username'), $this->input->post('admin_password'));
+            if ($admin !== FALSE) {
+                $sess_array = array(
+                    'admin_id' => $admin->admin_id,
+                    'admin_username' => $admin->admin_username
+                );
+                $this->session->set_userdata('logged_in', $sess_array);
+                redirect('admin/getUsers');
+            } else {
+                //show invalid username/password
+                $this->session->set_flashdata('message', "Wrong username or password");
+                redirect('admin');
+            }
         }
     }
 
-    /**
-     * Checking database
-     
-    public function check_database($password) {
-        //field validation succeeded. Validate against the database.
-        $username = $this->input->post('username');
+    public function admin_dashboard() {
+        //get session data
+        $logged_in = $this->session->userdata('logged_in');
 
-        //query the database(from model)
-        $result = $this->Users->login($username, $password);
-        print_r($result);
-        if ($result) {
-            $sess_array = array();
-            foreach ($result as $row) {
-                $sess_array = array(
-                    'id' => $row->id,
-                    'username' => $row->username
-                );
-                $this->session->set_userdata(logged_in, $sess_array);
-            }
-            return TRUE;
-        } else {
-            $this->form_validation->set_message('check_database', 'Invalid username or password');
-            return FALSE;
+        //check if session data is not exist/admin is not log in. redirect them to login page
+        if ($logged_in == FALSE) {
+            redirect('admin');
         }
-    }*/
+    }
 
-    /** Logout from user page
-      public function logout() {
+    // Logout from user page
+    public function logout() {
 
-      // Removing session data
-      $sess_array = array(
-      'admin_username' => ''
-      );
-      $this->session->unset_userdata('logged_in', $sess_array);
-      $data['message_display'] = 'Successfully Logout';
-      $this->load->view('admin_dashboard', $data);
-      } */
+        // Removing session data
+        $sess_array = array(
+            'admin_username' => ''
+        );
+        $this->session->unset_userdata('logged_in', $sess_array);
+        $this->session->set_flashdata('message', "Sucessfully Logout");
+        redirect("admin");
+        //$data['message_display'] = 'Successfully Logout';
+        //$this->load->view('admin_login', $data);
+    }
+
 }
 
 ?>

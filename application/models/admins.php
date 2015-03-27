@@ -31,5 +31,17 @@ class Admins extends MY_Model {
     */
    public $admin_password;
    
+   public function check_credential($admin_username, $admin_password)
+    {
+        $query = $this->db->get_where($this::DB_TABLE, array(
+            'admin_username' => $admin_username,
+            'admin_password' => $admin_password,
+        ));
+        $result = $query->row();
+        if (isset($result->admin_id)) {
+            return $result;
+        }
+        return FALSE;
+    }
 }
 

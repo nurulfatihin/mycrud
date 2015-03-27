@@ -7,8 +7,7 @@ class User extends CI_Controller {
 
     private $view_data = array();
 
-    public function __constructs()
-    {
+    public function __constructs() {
         parent::__construct();
     }
 
@@ -16,30 +15,29 @@ class User extends CI_Controller {
      * Load this function when visit mycrud.local
      * the parameter in the bracket is refer to any files in view.
      */
-    public function index()
-    {
+    public function index() {
         $this->load->view('users_login');
     }
 
     /**
      * Insert a new data into table users in the database
      */
-    public function create()
-    {
+    public function create() {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
         $this->load->model('Users');
         $data['users'] = '$id';
 
-        $this->form_validation->set_rules('firstname', 'First name', 'required');
-        $this->form_validation->set_rules('lastname', 'Last name', 'required');
+        $this->form_validation->set_rules('firstname', 'First name', 'required|alpha');
+        $this->form_validation->set_rules('lastname', 'Last name', 'required|alpha');
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
         $this->form_validation->set_rules('datestart', 'datestart', 'required');
+        $this->form_validation->set_rules('status', 'status');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('users_form');
@@ -54,46 +52,46 @@ class User extends CI_Controller {
             $users->username = $this->input->post('username');
             $users->password = $this->input->post('password');
             $users->datestart = $this->input->post('datestart');
+            $users->status = $this->input->post('status');
 
             $users->save();
-            $this->load->view("users_form_success");
-            //redirect("user/getUsers");
+            redirect('user/getUsers/' . $users->id);
         }
     }
 
-    public function getUsers()
-    {
+    public function getUsers($id) {
 
         $this->load->model('Users');
-        $data['users'] = $this->Users->get();
-        $this->load->view("user/user_dashboard", $data);
+        $data['users'] = $this->Users->getUserByID($id)->row();
+        $this->load->view("user_dashboard", $data);
     }
 
-    public function edit($id = FALSE)
-    {
+    public function edit($id = FALSE) {
 
         /**
          * load single user record and assign to $user variable
          */
-        $user = new users();
+        $this->load->model('Users');
+        $user = new Users();
         $user->load($id);
 
         if (!isset($user->id)) {
-            redirect("user/getUsers");
+            redirect("user/getUsers/" . $user->id);
         }
 
         /**
          * check if button submit is triggered
          */
         if (isset($_POST['submit'])) {
-            $this->form_validation->set_rules('firstname', 'First name', 'required');
-            $this->form_validation->set_rules('lastname', 'Last name', 'required');
+            $this->form_validation->set_rules('firstname', 'First name', 'required|alpha');
+            $this->form_validation->set_rules('lastname', 'Last name', 'required|alpha');
             $this->form_validation->set_rules('address', 'Address', 'required');
-            $this->form_validation->set_rules('mobile_no', 'Mobile Phone No.', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required');
-            $this->form_validation->set_rules('username', 'Username', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
             $this->form_validation->set_rules('datestart', 'datestart', 'required');
+            $this->form_validation->set_rules('status', 'status');
 
             if ($this->form_validation->run() === TRUE) {
                 /**
@@ -107,10 +105,11 @@ class User extends CI_Controller {
                 $user->username = $this->input->post('username');
                 $user->password = $this->input->post('password');
                 $user->datestart = $this->input->post('datestart');
+                $users->status = $this->input->post('status');
                 $user->save();
 
                 $this->session->set_flashdata('message', "Users information updated succesfully");
-                redirect("user/getUsers");
+                redirect("user/getUsers/" . $user->id);
             }
         }
 
@@ -118,11 +117,10 @@ class User extends CI_Controller {
          * pass $user to view
          */
         $this->view_data['user'] = $user;
-        $this->load->view("user_update_form", $this->view_data);
+        $this->load->view("users_update_form", $this->view_data);
     }
 
-    public function user_login_process()
-    {
+    public function user_login_process() {
 
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -131,7 +129,8 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('users_login');
+             
+             $this->load->view('users_login');
         } else {
             $user = $this->users->check_credential($this->input->post('username'), $this->input->post('password'));
             if ($user !== FALSE) {
@@ -140,16 +139,16 @@ class User extends CI_Controller {
                     'username' => $user->username
                 );
                 $this->session->set_userdata('logged_in', $sess_array);
-                redirect('user/user_dashboard');
+                redirect('user/getUsers/' . $user->id);
             } else {
                 //show invalid username/password
+                $this->session->set_flashdata('message', "Wrong username or password");
                 redirect('user');
             }
         }
     }
 
-    public function user_dashboard()
-    {
+    public function user_dashboard() {
         //get session data
         $logged_in = $this->session->userdata('logged_in');
 
@@ -157,23 +156,22 @@ class User extends CI_Controller {
         if ($logged_in === FALSE) {
             redirect('user');
         }
-        
+
         //your rest of code here
+    }
+
+// Logout from user page
+    public function logout() {
+
+        // Removing session data
+        $sess_array = array(
+            'username' => ''
+        );
+        $this->session->unset_userdata('logged_in', $sess_array);
+        $this->session->set_flashdata('message', "Sucessfully Logout");
+        redirect("user");
     }
 
 }
 
-/** Logout from user page
-  public function logout() {
-
-  // Removing session data
-  $sess_array = array(
-  'username' => ''
-  );
-  $this->session->unset_userdata('logged_in', $sess_array);
-  $data['message_display'] = 'Successfully Logout';
-  $this->load->view('user_form', $data);
-  }
-
- */
 ?>

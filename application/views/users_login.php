@@ -1,24 +1,38 @@
-<?php echo validation_errors();?>
-<?php echo form_open('user/user_login_process') ?>
+<html lang="en">
+    <head>
+        <title>User Login</title>   
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <?php
+        if ($this->session->flashdata('message')) {
+            echo $this->session->flashdata('message');
+        }
+        ?>
 
-<h1> Staff Login</h1>
-<form method="post">
-<div>
-    <label>Username :</label>
-    <input type="text" name="username" value=""/>
-</div>
+        <?php echo validation_errors(); ?>
+        <?php echo form_open('user/user_login_process') ?>
 
-<div>
-    <label>Password :</label>
-    <input type="password" name="password" value=""/>
-</div>
+        <h1> Staff Login</h1>
+        <form method="post">
+            <p>
+                <label>Username :</label>
+                <input type="text" name="username" value=""/>
+            </p>
 
-<div>
-    <input type="submit" value="Login" name="submit"/>
-</div>
+            <p>
+                <label>Password :</label>
+                <input type="password" name="password" value=""/>
+            </p>
 
-<div>
-    <a href="user/create">To SignUp Click Here</a>
-</div>
-</form>
-<?php echo form_close(); ?>
+            <p>
+                <input type="submit" value="Login" name="submit"/>
+            </p>
+
+            <p>
+                <a href="user/create">To SignUp Click Here</a>
+            </p>
+        </form>
+        <?php echo form_close(); ?>
+    </body>
+</html>

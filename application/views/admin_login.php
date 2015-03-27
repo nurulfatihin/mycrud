@@ -1,27 +1,33 @@
-<?php echo validation_errors();?>
-<?php echo form_open('admin/user_login_process') ?>
+<html>
+    <head>
+        <title>Admin Login</title>
+    </head>
+    <body>
+        <?php
+        if ($this->session->flashdata('message')) {
+            echo $this->session->flashdata('message');
+        }
+        ?>
 
-<h1> Admin Login</h1>
-<form method="post">
-<div>
-    <label>UserName :</label>
-    <input type="text" name="admin_username" value=""/>
-</div>
+        <?php echo validation_errors(); ?>
+        <?php echo form_open('admin/admin_login_process') ?>
 
-<div>
-    <label>Password :</label>
-    <input type="password" name="admin_password" value=""/>
-</div>
+        <h1> Admin Login</h1>
+        <form method="post">
+            <div>
+                <label>Username :</label>
+                <input type="text" name="admin_username" value=""/>
+            </div>
 
-<div>
-    <input type="submit" value=" Login " name="submit"/>
-</div>
-</form>
-<?php echo form_close(); ?><?php
+            <div>
+                <label>Password :</label>
+                <input type="password" name="admin_password" value=""/>
+            </div>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+            <div>
+                <input type="submit" value=" Login " name="submit"/>
+            </div>
+        </form>
+        <?php echo form_close(); ?>
+    </body>
+</html>

@@ -87,8 +87,7 @@ class Users extends MY_Model {
      * Register and create data
      * @return type
      */
-    public function set_users()
-    {
+    public function set_users() {
         $this->load->helper('url');
         $slug = url_title($this->input->post('id'), 'dash', TRUE);
         $data = array(
@@ -101,6 +100,7 @@ class Users extends MY_Model {
             'username' => $this->input->post('username'),
             'password' => $this->input->post('password'),
             'datestart' => $this->input->post('datestart'),
+            
         );
         return $this->db->insert('users', $data);
     }
@@ -109,8 +109,7 @@ class Users extends MY_Model {
      * retrieve data from database
      * @return type
      */
-    function getAllUsers()
-    {
+    function getAllUsers() {
         $this->load->model("users");
         $data = $this->db->get("users");
         if ($data->num_rows() > 0) {
@@ -124,16 +123,14 @@ class Users extends MY_Model {
      * @param type $data
      * @return type
      */
-    function getUserByID($data)
-    {
+    function getUserByID($data) {
 
         $this->db->where('id', $data);
         $query = $this->db->get('users');
-        return $query->row();
+        return $query;
     }
 
-    public function check_credential($username, $password)
-    {
+    public function check_credential($username, $password) {
         $query = $this->db->get_where($this::DB_TABLE, array(
             'username' => $username,
             'password' => $password,
@@ -144,5 +141,16 @@ class Users extends MY_Model {
         }
         return FALSE;
     }
+
+    /**
+     * Search function
+    
+    function getSearch() {
+        $match = $this->input->post('search');
+        $this->db->like(‘firstname ’,$match);
+        $this->db->or_like(‘lastname ’,$match);
+        $this->db->or_like(‘status ’,$match);
+        $query = $this->db->get(‘users’);
+    } */
 
 }
