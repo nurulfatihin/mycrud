@@ -2,7 +2,7 @@
     <head>
         <title>User Login</title>   
         <link rel="stylesheet" type="text/css" href="style.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     </head>
     <body>
         <?php
@@ -14,16 +14,16 @@
         <?php echo validation_errors(); ?>
         <?php echo form_open('user/user_login_process') ?>
 
-        <h1> Staff Login</h1>
-        <form method="post">
-            <p>
+        <div class="container"><div class="row"><div class="col-md-6 col-md-offset-3"><h1> Staff Login</h1>
+        <form method="post" class="form">
+            <div class="form-group">
                 <label>Username :</label>
-                <input type="text" name="username" value=""/>
+                <input type="text" name="username" value="" class="form-control"/>
             </p>
 
             <p>
                 <label>Password :</label>
-                <input type="password" name="password" value=""/>
+                <input type="password" name="password" value="" class="form-control"/>
             </p>
 
             <p>
@@ -33,24 +33,8 @@
             <p>
                 <a href="user/create">To SignUp Click Here</a>
             </p>
-        </form>
+        </form></div></div></div>
         <?php echo form_close(); ?>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">.col-md-8</div>
-                <div class="col-md-4">.col-md-4</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">.col-md-4</div>
-                <div class="col-md-4">.col-md-4</div>
-                <div class="col-md-4">.col-md-4</div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">.col-md-6</div>
-                <div class="col-md-6">.col-md-6</div>
-            </div>
-        </div>
-
-    </body>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>    </body>
 </html>
