@@ -88,7 +88,7 @@ class User extends CI_Controller {
             $this->form_validation->set_rules('address', 'Address', 'required');
             $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+            $this->form_validation->set_rules('username', 'Username', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
             $this->form_validation->set_rules('datestart', 'datestart', 'required');
             $this->form_validation->set_rules('status', 'status');
@@ -122,6 +122,7 @@ class User extends CI_Controller {
 
     public function user_login_process() {
 
+        
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('users');
@@ -129,8 +130,9 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
+            
+            $this->load->view('users_login');
              
-             $this->load->view('users_login');
         } else {
             $user = $this->users->check_credential($this->input->post('username'), $this->input->post('password'));
             if ($user !== FALSE) {

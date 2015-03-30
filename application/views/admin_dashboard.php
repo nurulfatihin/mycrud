@@ -24,6 +24,14 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <!--load the js and css-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-theme.min.css'); ?>">
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 
     </head>
 
@@ -42,14 +50,12 @@
                         <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Address</th>
-                        <th>Mobile Number</th>
-                        <th>Email</th>
+                        
                         <th>Username</th>
                         <th>Password</th>
-                        <th>Date Start</th>
+                        
                         <th>Status</th>
-                        <th>Modified</th>
+                        
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -62,16 +68,15 @@
                             <td><?= $row->id ?></td>
                             <td><?= $row->firstname ?></td>
                             <td><?= $row->lastname ?></td>
-                            <td><?= $row->address ?></td>
-                            <td><?= $row->mobile_no ?></td>
-                            <td><?= $row->email ?></td>
+                            
                             <td><?= $row->username ?></td>
                             <td><?= $row->password ?></td>
-                            <td><?= $row->datestart ?></td>
+                            
                             <td><?= $row->status ?></td>
-                            <td><?= $row->modified ?></td>
-                            <td><a href ="<?= site_url("admin/edit/" . $row->id) ?>">Edit</a>|
-                                <a href ="<?= site_url("admin/delete/" . $row->id) ?>">Delete</a></td>
+                            
+                            <td><a class="btn btn-default" href ="<?= site_url("admin/edit/" . $row->id) ?>">Edit</a>
+                                <a class="btn btn-default" href ="<?= site_url("admin/delete/" . $row->id) ?>">Delete</a></td>
+                            
                         </tr>
                     </tbody>
                     <?php
