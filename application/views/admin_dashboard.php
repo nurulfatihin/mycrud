@@ -41,13 +41,14 @@
             echo $this->session->flashdata('message');
         }
         ?>
-        <h1>Staff Information</h1>
-        <h2><a href ="<?= site_url("admin/logout") ?>">Logout</a></h2>
+        <h1 class="text-center">Staff Information</h1><p class="text-right"><a class="btn btn-default" href ="<?= site_url("admin/logout") ?>">Logout</a></p>
+        
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Admin ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         
@@ -66,6 +67,7 @@
                     <tbody>
                         <tr>
                             <td><?= $row->id ?></td>
+                            <td><?= $row->admin_id?></td>
                             <td><?= $row->firstname ?></td>
                             <td><?= $row->lastname ?></td>
                             

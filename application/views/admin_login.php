@@ -28,12 +28,12 @@
                     <form class="form" method="post">
                         <div class="form-group">
                             <label>Username :</label>
-                            <input class="form-control" type="text" name="admin_username" placeholder="Enter username"/>
+                            <input class="form-control" type="text" name="admin_username" placeholder="Enter username" value="<?php echo set_value("username"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label>Password :</label>
-                            <input class="form-control" type="password" name="admin_password" placeholder="Enter password"/>                        
+                            <input class="form-control" type="password" name="admin_password" placeholder="Enter password" value="<?php echo set_value("password"); ?>"/>                        
                         </div>
 
                         <div class="form-group">

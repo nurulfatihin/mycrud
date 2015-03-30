@@ -27,42 +27,42 @@
                     <form class="form" method="post">
                         <div class="form-group">
                             <label for="firstname">First Name</label>
-                            <input class="form-control" type="text" name="firstname" placeholder="eg:John"/>
+                            <input class="form-control" type="text" name="firstname" placeholder="eg:John" value="<?php echo set_value("firstname"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label for="lastname">Last Name</label>
-                            <input class="form-control" type="text" name="lastname" placeholder="eg:Carter"/>
+                            <input class="form-control" type="text" name="lastname" placeholder="eg:Carter" value="<?php echo set_value("lastname"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input class="form-control" type="text" name="address" placeholder="eg:No 10 Jln Plumbum 10, 42200, Kapar, Selangor"/>
+                            <input class="form-control" type="text" name="address" placeholder="eg:No 10 Jln Plumbum 10, 42200, Kapar, Selangor" value="<?php echo set_value("address"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label for="mobile_no">Mobile Phone No.</label>
-                            <input class="form-control" type="text" name="mobile_no" placeholder="eg:019-2941123"/>
+                            <input class="form-control" type="text" name="mobile_no" placeholder="eg:019-2941123" value="<?php echo set_value("mobile_no"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input class="form-control" type="text" name="email" placeholder="eg:john@gmail.com"/>
+                            <input class="form-control" type="text" name="email" placeholder="eg:john@gmail.com" value="<?php echo set_value("email"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input class="form-control" type="text" name="username" placeholder="eg:johnsome123"/>
+                            <input class="form-control" type="text" name="username" placeholder="eg:johnsome123" value="<?php echo set_value("username"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input class="form-control" type="password" name="password" placeholder="eg:******"/>
+                            <input class="form-control" type="password" name="password" placeholder="eg:******" value="<?php echo set_value("password"); ?>"/>
                         </div>
 
                         <div class="form-group">
                             <label for="datestart">Date Start</label>
-                            <input class="form-control" type="date" name="datestart" value=""/>
+                            <input class="form-control" type="date" name="datestart" value="<?php echo set_value("datestart"); ?>"/>
                         </div>
 
                         <div class="form-group">

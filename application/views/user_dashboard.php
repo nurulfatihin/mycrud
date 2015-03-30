@@ -70,8 +70,8 @@ if ($this->session->flashdata('message')) {
                         </div>
 
 
-                        <div><a href ="<?= site_url("user/edit/" . $users->id) ?>">Edit</a>|
-                            <a href ="<?= site_url("user/logout") ?>">Logout</a>
+                        <div><a class="btn btn-default" href ="<?= site_url("user/edit/" . $users->id) ?>">Edit</a>|
+                            <a class="btn btn-default" href ="<?= site_url("user/logout") ?>">Logout</a>                           
                         </div>
                     </form>
                 </div>

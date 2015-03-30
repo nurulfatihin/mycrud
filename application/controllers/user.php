@@ -35,7 +35,7 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|alpha_numeric');
         $this->form_validation->set_rules('datestart', 'datestart', 'required');
         $this->form_validation->set_rules('status', 'status');
 
@@ -105,7 +105,7 @@ class User extends CI_Controller {
                 $user->username = $this->input->post('username');
                 $user->password = $this->input->post('password');
                 $user->datestart = $this->input->post('datestart');
-                $users->status = $this->input->post('status');
+                
                 $user->save();
 
                 $this->session->set_flashdata('message', "Users information updated succesfully");

@@ -21,54 +21,51 @@
                     ?>
 
                     <?php echo validation_errors('<div class="alert alert-danger" role="alert">', '</div>'); ?>
-
                     <?php echo form_open('admin/edit/' . $user->id); ?>
                     <h1>Editting</h1>
-                    <form class="form" method="post">
+                    <form method="post">
                         <div class="form-group">
                             <label>Id :</label>
-                            <input class="form-control" type="text" name="id" value="<?php echo set_value('id', $user->id); ?>">
+                            <input class="form-control" type="text" name="id" value="<?php echo set_value('id', $user->id); ?>" disabled/>
                         </div>
                         <div class="form-group">
                             <label>First Name :</label>
-                            <input class="form-control" type="text" name="firstname" value="<?php echo set_value('firstname', $user->firstname); ?>">
+                            <input class="form-control" type="text" name="firstname" value="<?php echo set_value('firstname', $user->firstname); ?>"/>
                         </div>
                         <div class="form-group">    
                             <label>Last Name :</label>
-                            <input class="form-control" type="text" name="lastname" value="<?php echo set_value('lastname', $user->lastname); ?>">
+                            <input class="form-control" type="text" name="lastname" value="<?php echo set_value('lastname', $user->lastname); ?>"/>
                         </div>
                         <div class="form-group">
                             <label>Address :</label>
-                            <input class="form-control" type="text" name="address" value="<?php echo set_value('address', $user->address); ?>">
+                            <input class="form-control" type="text" name="address" value="<?php echo set_value('address', $user->address); ?>"/>
                         </div>
                         <div class="form-group">
                             <label>Email :</label>
-                            <input class="form-control" type="text" name="email" value="<?php echo set_value('email', $user->email); ?>">
+                            <input class="form-control" type="text" name="email" value="<?php echo set_value('email', $user->email); ?>"/>
                         </div>
                         <div class="form-group">
                             <label>Mobile Number :</label>
-                            <input class="form-control" type="text" name="mobile_no" value="<?php echo set_value('mobile_no', $user->mobile_no); ?>">
+                            <input class="form-control" type="text" name="mobile_no" value="<?php echo set_value('mobile_no', $user->mobile_no); ?>"/>
                         </div>
                         <div class="form-group">
                             <label>Username :</label>
-                            <input class="form-control" type="text" name="username" value="<?php echo set_value('username', $user->username); ?>">
+                            <input class="form-control" type="text" name="username" value="<?php echo set_value('username', $user->username); ?>"/>
                         </div>
                         <div class="form-group">
                             <label>Password :</label>
-                            <input class="form-control" type="text" name="password" value="<?php echo set_value('password', $user->password); ?>">
+                            <input class="form-control" type="text" name="password" value="<?php echo set_value('password', $user->password); ?>"/>
                         </div>
                         <div class="form-group">
                             <label>Date Start :</label>
-                            <input class="form-control" type="date" name="datestart" value="<?php echo set_value('datestart', $user->datestart); ?>">
+                            <input class="form-control" type="date" name="datestart" value="<?php echo set_value('datestart', $user->datestart); ?>"/>
                         </div>
                         <div class="form-group">
                             <label>Status :</label>
-                            <input class="form-control" type="text" name="status" value="<?php echo set_value('status', $user->status); ?>">
-                            <select class="form-control">Active</select>
-                            <select class="form-control">Suspend</select>
+                            <input class="form-control" type="text" name="status" value="<?php echo set_value('status', $user->status); ?>"/>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-default" type="submit"  value="Save"/>
+                            <input class="btn btn-default" type="submit"  name="submit"  value="Save"/>
                         </div>
                     </form>
                     <?php echo form_close(); ?>

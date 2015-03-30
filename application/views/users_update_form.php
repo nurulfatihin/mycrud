@@ -55,15 +55,11 @@
                         </div>
                         <div class="form-group">
                             <label>Date Start :</label>
-                            <input class="form-control" type="text" name="datestart" value="<?php echo set_value('datestart', $user->datestart); ?>">
+                            <input class="form-control" type="date" name="datestart" value="<?php echo set_value('datestart', $user->datestart); ?>">
                         </div>
+                       
                         <div class="form-group">
-                            <label>Status :</label>
-                            <input class="form-control" type="text" name="status" value="<?php echo set_value('status', $user->status); ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" name="submit" value="Save"/>
+                            <input class="btn btn-default" type="submit" name="submit" value="Save"/>
                         </div>
                     </form>
 
