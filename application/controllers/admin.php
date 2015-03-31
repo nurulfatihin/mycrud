@@ -65,6 +65,7 @@ class Admin extends CI_Controller {
                 /**
                  * Update the record
                  */
+                $user->admin_id = $this->input->post('admin_id');
                 $user->firstname = $this->input->post('firstname');
                 $user->lastname = $this->input->post('lastname');
                 $user->address = $this->input->post('address');

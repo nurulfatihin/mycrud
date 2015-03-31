@@ -38,7 +38,7 @@
     <body>
         <?php
         if ($this->session->flashdata('message')) {
-            echo $this->session->flashdata('message');
+            echo '<script>alert("You Have Successfully updated this Record!");</script>' ;
         }
         ?>
         <h1 class="text-center">Staff Information</h1><p class="text-right"><a class="btn btn-default" href ="<?= site_url("admin/logout") ?>">Logout</a></p>
