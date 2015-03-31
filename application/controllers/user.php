@@ -78,7 +78,7 @@ class User extends CI_Controller {
     public function edit($id = FALSE) {
 
         $auth = $this->session->userdata('logged_in');
-
+        print_r($auth);
         if (!isset($auth->$id)) {
             redirect('user');
         } else {
