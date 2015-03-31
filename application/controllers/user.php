@@ -34,8 +34,8 @@ class User extends CI_Controller {
         $this->load->model('Users');
         $data['users'] = '$id';
 
-        $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space|alpha');
-        $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space|alpha');
+        $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space');
+        $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space');
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -88,8 +88,8 @@ class User extends CI_Controller {
          * check if button submit is triggered
          */
         if (isset($_POST['submit'])) {
-            $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space|alpha');
-            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space|alpha');
+            $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space');
+            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space');
             $this->form_validation->set_rules('address', 'Address', 'required');
             $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
