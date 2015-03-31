@@ -32,6 +32,11 @@ class Admin extends CI_Controller {
         $data['users'] = $this->Users->get();
         $this->load->view("admin_dashboard", $data);
     }
+    
+    function alpha_dash_space($str)
+{
+    return ( ! preg_match("/^([-a-z_ ])+$/i", $str)) ? FALSE : TRUE;
+} 
 
     public function edit($id = FALSE) {
 
@@ -51,8 +56,8 @@ class Admin extends CI_Controller {
          */
         if (isset($_POST['submit'])) {
             $this->form_validation->set_rules('admin_id', 'Admin ID', 'required');
-            $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space');
-            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space');
+            $this->form_validation->set_rules('firstname', 'First name', 'required|alpha|callback__alpha_dash_space');
+            $this->form_validation->set_rules('lastname', 'Last name', 'required|alpha|callback__alpha_dash_space');
             $this->form_validation->set_rules('address', 'Address', 'required');
             $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
