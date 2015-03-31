@@ -56,8 +56,8 @@ class Admin extends CI_Controller {
          */
         if (isset($_POST['submit'])) {
             $this->form_validation->set_rules('admin_id', 'Admin ID', 'required');
-            $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space');
-            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space');
+            $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space|alpha');
+            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space|alpha');
             $this->form_validation->set_rules('address', 'Address', 'required');
             $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
