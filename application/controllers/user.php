@@ -79,7 +79,10 @@ class User extends CI_Controller {
 
         $auth = $this->session->userdata('logged_in');
 
-        print_r($auth);
+        if(!isset($auth->$id))
+        {
+            redirect('user');
+        }
         /**
          * load single user record and assign to $user variable
          */
