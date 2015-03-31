@@ -18,11 +18,15 @@ class User extends CI_Controller {
     public function index() {
         $this->load->view('users_login');
     }
-    
-    function alpha_dash_space($str)
-{
-    return ( ! preg_match("/^([-a-z_ ])+$/i", $str)) ? FALSE : TRUE;
-} 
+
+    public function alpha_dash_space($str) {
+        if (preg_match('/^[a-zA-Z\s]+$/', $str)) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('alpha_dash_space', 'Cannot contain numbers');
+            return FALSE;
+        }
+    }
 
     /**
      * Insert a new data into table users in the database
@@ -34,8 +38,8 @@ class User extends CI_Controller {
         $this->load->model('Users');
         $data['users'] = '$id';
 
-        $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space');
-        $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space');
+        $this->form_validation->set_rules('firstname', 'First name', 'required|callback_alpha_dash_space');
+        $this->form_validation->set_rules('lastname', 'Last name', 'required|callback_alpha_dash_space');
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -88,8 +92,8 @@ class User extends CI_Controller {
          * check if button submit is triggered
          */
         if (isset($_POST['submit'])) {
-            $this->form_validation->set_rules('firstname', 'First name', 'required|callback__alpha_dash_space');
-            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback__alpha_dash_space');
+            $this->form_validation->set_rules('firstname', 'First name', 'required|callback_alpha_dash_space');
+            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback_alpha_dash_space');
             $this->form_validation->set_rules('address', 'Address', 'required');
             $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -110,7 +114,7 @@ class User extends CI_Controller {
                 $user->username = $this->input->post('username');
                 $user->password = $this->input->post('password');
                 $user->datestart = $this->input->post('datestart');
-                
+
                 $user->save();
 
                 $this->session->set_flashdata('message', "Users information updated succesfully");
@@ -127,7 +131,7 @@ class User extends CI_Controller {
 
     public function user_login_process() {
 
-        
+
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('users');
@@ -135,9 +139,8 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            
+
             $this->load->view('users_login');
-             
         } else {
             $user = $this->users->check_credential($this->input->post('username'), $this->input->post('password'));
             if ($user !== FALSE) {
