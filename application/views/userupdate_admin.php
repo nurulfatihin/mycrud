@@ -28,7 +28,7 @@
                             <label>Id :</label>
                             <input class="form-control" type="text" name="id" value="<?php echo set_value('id', $user->id); ?>" disabled/>
                         </div>
-                        
+
                         <div class="form-group <?php echo form_error('admin_id') !== "" ? 'has-error' : ''; ?>">
                             <label>Admin ID :</label>
                             <input class="form-control" type="text" name="admin_id" value="<?php echo set_value('admin_id', $user->admin_id); ?>"/>
@@ -85,7 +85,12 @@
 
                         <div class="form-group <?php echo form_error('status') !== "" ? 'has-error' : ''; ?>">
                             <label>Status :</label>
-                            <input class="form-control" type="text" name="status" value="<?php echo set_value('status', $user->status); ?>"/>
+                            <select class="form-control" type="text" name="status">
+                                <option><?php echo set_value('status', $user->status); ?></option>
+                                <option>Retired</option>
+                                <option>Suspend</option>
+                                <option>Active</option>
+                            </select>
                             <?php echo form_error('status', '<span id="helpBlock" class="help-block">', '</span>'); ?>
                         </div>
 
@@ -102,4 +107,3 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 </html>
-
