@@ -19,8 +19,11 @@
  *
  */
 
-echo $_SERVER['SERVER_NAME'];
+if( $_SERVER['SERVER_NAME']=='nurul.evernue.com'){
 	define('ENVIRONMENT', 'production');
+}else{
+	define('ENVIRONMENT', 'development');
+}
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
