@@ -18,6 +18,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+
+echo $_SERVER['SERVER_NAME'];
 	define('ENVIRONMENT', 'production');
 /*
  *---------------------------------------------------------------
