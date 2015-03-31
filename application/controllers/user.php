@@ -79,53 +79,53 @@ class User extends CI_Controller {
 
         $auth = $this->session->userdata('logged_in');
 
-        if(!isset($auth->$id))
-        {
+        if (!isset($auth->$id)) {
             redirect('user');
-        }
-        /**
-         * load single user record and assign to $user variable
-         */
-        $this->load->model('Users');
-        $user = new Users();
-        $user->load($id);
+        } else {
+            $this->load->model('Users');
+            $user = new Users();
+            $user->load($id);
 
-        if (!isset($user->id)) {
-            redirect("user/getUsers/" . $user->id);
-        }
-
-        /**
-         * check if button submit is triggered
-         */
-        if (isset($_POST['submit'])) {
-            $this->form_validation->set_rules('firstname', 'First name', 'required|callback_alpha_dash_space');
-            $this->form_validation->set_rules('lastname', 'Last name', 'required|callback_alpha_dash_space');
-            $this->form_validation->set_rules('address', 'Address', 'required');
-            $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('username', 'Username', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-            $this->form_validation->set_rules('datestart', 'datestart', 'required');
-            $this->form_validation->set_rules('status', 'status');
-
-            if ($this->form_validation->run() === TRUE) {
-                /**
-                 * Update the record
-                 */
-                $user->firstname = $this->input->post('firstname');
-                $user->lastname = $this->input->post('lastname');
-                $user->address = $this->input->post('address');
-                $user->mobile_no = $this->input->post('mobile_no');
-                $user->email = $this->input->post('email');
-                $user->username = $this->input->post('username');
-                $user->password = $this->input->post('password');
-                $user->datestart = $this->input->post('datestart');
-
-                $user->save();
-
-                $this->session->set_flashdata('message', "Users information updated succesfully");
+            if (!isset($user->id)) {
                 redirect("user/getUsers/" . $user->id);
             }
+
+            /**
+             * check if button submit is triggered
+             */
+            if (isset($_POST['submit'])) {
+                $this->form_validation->set_rules('firstname', 'First name', 'required|callback_alpha_dash_space');
+                $this->form_validation->set_rules('lastname', 'Last name', 'required|callback_alpha_dash_space');
+                $this->form_validation->set_rules('address', 'Address', 'required');
+                $this->form_validation->set_rules('mobile_no', 'Mobile no.', 'required');
+                $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+                $this->form_validation->set_rules('username', 'Username', 'required');
+                $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+                $this->form_validation->set_rules('datestart', 'datestart', 'required');
+                $this->form_validation->set_rules('status', 'status');
+
+                if ($this->form_validation->run() === TRUE) {
+                    /**
+                     * Update the record
+                     */
+                    $user->firstname = $this->input->post('firstname');
+                    $user->lastname = $this->input->post('lastname');
+                    $user->address = $this->input->post('address');
+                    $user->mobile_no = $this->input->post('mobile_no');
+                    $user->email = $this->input->post('email');
+                    $user->username = $this->input->post('username');
+                    $user->password = $this->input->post('password');
+                    $user->datestart = $this->input->post('datestart');
+
+                    $user->save();
+
+                    $this->session->set_flashdata('message', "Users information updated succesfully");
+                    redirect("user/getUsers/" . $user->id);
+                }
+            }
+            /**
+             * load single user record and assign to $user variable
+             */
         }
 
         /**
