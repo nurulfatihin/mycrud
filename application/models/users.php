@@ -77,11 +77,7 @@ class Users extends MY_Model {
      */
     public $modified;
 
-    /**
-     * Users username
-     * @var varchar 
-     */
-    public $picture;
+    
 
     /**
      * Register and create data

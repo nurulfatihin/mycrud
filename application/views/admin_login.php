@@ -21,19 +21,20 @@
                     }
                     ?>
 
-                    <?php echo validation_errors('<div class="alert alert-danger" role="alert">', '</div>'); ?>
                     <?php echo form_open('admin/admin_login_process') ?>
 
                     <h1> Admin Login</h1>
                     <form class="form" method="post">
-                        <div class="form-group">
+                        <div class="form-group <?php echo form_error('admin_username') !== "" ? 'has-error' : ''; ?>">
                             <label>Username :</label>
-                            <input class="form-control" type="text" name="admin_username" placeholder="Enter username" value="<?php echo set_value("username"); ?>"/>
+                            <input class="form-control" type="text" name="admin_username" placeholder="Enter username" value="<?php echo set_value("admin_username"); ?>"/>
+                            <?php echo form_error('admin_username', '<span id="helpBlock" class="help-block">', '</span>'); ?>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group <?php echo form_error('admin_password') !== "" ? 'has-error' : ''; ?>">
                             <label>Password :</label>
-                            <input class="form-control" type="password" name="admin_password" placeholder="Enter password" value="<?php echo set_value("password"); ?>"/>                        
+                            <input class="form-control" type="password" name="admin_password" placeholder="Enter password" value="<?php echo set_value("admin_password"); ?>"/>                        
+                            <?php echo form_error('admin_password', '<span id="helpBlock" class="help-block">', '</span>'); ?>
                         </div>
 
                         <div class="form-group">
